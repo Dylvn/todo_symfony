@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %}AppBundle:TodoList:index{% endblock %}
+
+{% block h1 %}
+    <h1>Liste des tâches</h1>
+{% endblock h1 %}
+
+{% block content %}
+
+    {% if todolists|length > 0 %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Fait ?</th>
+                <th>Modifier</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for todolist in todolists %}
+                    <tr>
+                        <th scope="row">{{ todolist.title }}</th>
+                        <th>
+                            <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" disabled {% if todolist.checked %}checked{% endif %}>
+                                <span class="custom-control-indicator" {% if todolist.checked %}style="background-color: #629755"{% endif %}></span>
+                            </label>
+                        </th>
+                        <th>
+                            <a class="btn btn-info" href="{{ path('todo_list_update', {'todoList': todolist.id}) }}">Modifier</a>
+                        </th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Pas encore de tâches ? <a href="{{ path('todo_list_create') }}">Créez-en !</a></p>
+    {% endif %}
+
+{% endblock %}

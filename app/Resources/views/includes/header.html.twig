@@ -1,0 +1,16 @@
+<div class="masthead clearfix">
+    <div class="inner">
+        <h3 class="masthead-brand">Cover</h3>
+        <nav class="nav nav-masthead">
+            <a class="nav-link active" href="/">Home</a>
+            {% if is_granted("ROLE_USER") %}
+                <a class="nav-link" href="{{ path('todo_list_index') }}">Liste de mes tâches</a>
+                <a class="nav-link" href="{{ path('todo_list_create') }}">Creer une tâche</a>
+                <a class="nav-link" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+            {% else %}
+                <a class="nav-link" href="{{ path('fos_user_registration_register') }}">S'inscrire</a>
+                <a class="nav-link" href="{{ path('fos_user_security_login') }}">Connexion</a>
+            {% endif %}
+        </nav>
+    </div>
+</div>
